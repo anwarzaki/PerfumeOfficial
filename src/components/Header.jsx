@@ -103,8 +103,11 @@ const Header = () => {
     <div className="fixed top-0 left-0 w-full bg-transparent hover:bg-white/80 transition-all duration-300 z-50">
       <header className="bg-[#003366]/90 hover:bg-[#003366] transition-all duration-300">
         <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-lobster text-white drop-shadow-lg">
-            TheFantessia
+          {/* <h2 className="text-2xl font-lobster text-white drop-shadow-lg">
+            TheresinFantasia
+          </h2> */}
+          <h2 className="text-2xl font-serif text-white tracking-tight drop-shadow-xl">
+            TheResinFantasia
           </h2>
 
           <div className="flex flex-1 items-center justify-end md:justify-between">
