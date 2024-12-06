@@ -11,6 +11,8 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Product from "./pages/Product";
 
+// const clerkFrontendApi = process.env.VITE_CLERK_PUBLISHABLE_KEY;
+
 const ClerkProviderWrapper = ({ children }) => (
   <>
     <SignedOut>

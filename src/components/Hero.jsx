@@ -22,10 +22,11 @@ const Hero = () => {
         {/* Overlay Text */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center px-4 md:px-8">
           <h1 className="text-4xl font-bold drop-shadow-lg">
-            Frame Your Memories
+            Scent Your Memories
           </h1>
           <p className="text-lg mt-2 drop-shadow-lg">
-            Discover handcrafted frames to cherish your special moments.
+            Discover handcrafted fragrances to cherish your unforgettable
+            moments.
           </p>
         </div>
       </section>

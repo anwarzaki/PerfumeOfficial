@@ -71,7 +71,7 @@ const PerfumeCard = () => {
           <h3 className="mt-4 text-lg font-medium text-gray-900">
             Black Matte Metal Frame
           </h3>
-          <p className="mt-1.5 text-sm text-gray-700">$₹1,500</p>
+          <p className="mt-1.5 text-sm text-gray-700">₹1,500</p>
 
           <form className="mt-4">
             <button className="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
@@ -179,7 +179,7 @@ const PerfumeCard = () => {
           <p className="mt-1.5 text-sm text-gray-700">₹3,500</p>
 
           <form className="mt-4">
-            <button className="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
+            <button className="block w-fubll rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
               Purchase
             </button>
           </form>

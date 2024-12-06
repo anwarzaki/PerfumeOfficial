@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
+import { UserButton, useUser } from "@clerk/clerk-react";
 
 const Header = () => {
+  const { isSignedIn, user } = useUser(); // Use Clerk's useUser hook
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -13,9 +15,6 @@ const Header = () => {
     <div className="fixed top-0 left-0 w-full bg-transparent hover:bg-white/80 transition-all duration-300 z-50">
       <header className="bg-[#003366]/90 hover:bg-[#003366] transition-all duration-300">
         <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
-          {/* <h2 className="text-2xl font-lobster text-white drop-shadow-lg">
-            TheresinFantasia
-          </h2> */}
           <h2 className="text-2xl font-serif text-white tracking-tight drop-shadow-xl">
             Essencia
           </h2>
@@ -34,39 +33,53 @@ const Header = () => {
                   </button>
                 </li>
                 <li className="flex items-center gap-2 text-white cursor-pointer">
-                  <Link to="/">Home</Link> {/* Replaced <a> with <Link> */}
+                  <Link to="/">Home</Link>
                 </li>
                 <li className="flex items-center gap-2 text-white cursor-pointer">
-                  <Link to="/about">About</Link>{" "}
-                  {/* Replaced <a> with <Link> */}
+                  <Link to="/about">About</Link>
                 </li>
                 <li className="flex items-center gap-2 text-white cursor-pointer">
-                  <Link to="/contact">Contact</Link>{" "}
-                  {/* Replaced <a> with <Link> */}
+                  <Link to="/contact">Contact</Link>
                 </li>
                 <li className="flex items-center gap-2 text-white cursor-pointer">
-                  <Link to="/product">Product</Link>{" "}
-                  {/* Replaced <a> with <Link> */}
+                  <Link to="/product">Product</Link>
                 </li>
               </ul>
             </nav>
 
             <div className="flex items-center gap-4">
-              <div className="sm:flex sm:gap-4">
-                <Link
-                  to="/login" // Use Link to route to the login page
-                  className="block rounded-md bg-[#9F4C5B] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#B76E79]"
-                >
-                  Login
-                </Link>
+              {!isSignedIn ? (
+                // Show Login and Sign-Up buttons when the user is not signed in
+                <div className="sm:flex sm:gap-4">
+                  <Link
+                    to="/sign-in"
+                    className="block rounded-md bg-[#9F4C5B] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#B76E79]"
+                  >
+                    Login
+                  </Link>
 
-                <Link
-                  to="/signup" // Use Link to route to the signup page
-                  className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#9F4C5B] transition hover:text-[#B76E79] sm:block"
-                >
-                  Sign up
-                </Link>
-              </div>
+                  <Link
+                    to="/sign-up"
+                    className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#9F4C5B] transition hover:text-[#B76E79] sm:block"
+                  >
+                    Sign up
+                  </Link>
+                </div>
+              ) : (
+                // Show User Profile when signed in
+                <div className="flex items-center gap-2">
+                  {/* <img
+                    src={user.setProfileImage}
+                    alt="User Profile"
+                    className="w-10 h-10 rounded-full border-2 border-white"
+                  /> */}
+                  <span className="text-white flex gap-2">
+                    {/* {user.fullName || user.username} */}
+                    <UserButton />
+                    <h2>{user.fullName}</h2>
+                  </span>
+                </div>
+              )}
 
               {/* Hamburger Menu for Mobile */}
               <button
@@ -93,85 +106,50 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Menu - Displayed when menu is open */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="absolute top-16 left-0 w-full bg-[#003366] md:hidden">
             <ul className="flex flex-col items-center gap-6 text-sm text-white py-6">
               <li>
-                <Link to="/" className="cursor-pointer" onClick={toggleMenu}>
+                <Link to="/" onClick={toggleMenu}>
                   Home
-                </Link>{" "}
-                {/* Replaced <a> with <Link> */}
+                </Link>
               </li>
               <li>
-                <Link
-                  to="/about"
-                  className="cursor-pointer"
-                  onClick={toggleMenu}
-                >
+                <Link to="/about" onClick={toggleMenu}>
                   About
-                </Link>{" "}
-                {/* Replaced <a> with <Link> */}
+                </Link>
               </li>
               <li>
-                <Link
-                  to="/contact"
-                  className="cursor-pointer"
-                  onClick={toggleMenu}
-                >
+                <Link to="/contact" onClick={toggleMenu}>
                   Contact
-                </Link>{" "}
-                {/* Replaced <a> with <Link> */}
+                </Link>
               </li>
               <li>
-                <Link
-                  to="/product"
-                  className="cursor-pointer"
-                  onClick={toggleMenu}
-                >
+                <Link to="/product" onClick={toggleMenu}>
                   Product
-                </Link>{" "}
-                {/* Replaced <a> with <Link> */}
+                </Link>
               </li>
-              <li>
-                <Link
-                  to="/login"
-                  className="cursor-pointer"
-                  onClick={toggleMenu}
-                >
-                  Login
-                </Link>{" "}
-                {/* Replaced <a> with <Link> */}
-              </li>
-              <li>
-                <Link
-                  to="/signup"
-                  className="cursor-pointer"
-                  onClick={toggleMenu}
-                >
-                  Sign Up
-                </Link>{" "}
-                {/* Replaced <a> with <Link> */}
-              </li>
+              {!isSignedIn ? (
+                <>
+                  <li>
+                    <Link to="/sign-in" onClick={toggleMenu}>
+                      Login
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/sign-up" onClick={toggleMenu}>
+                      Sign Up
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <li onClick={toggleMenu}>
+                  {/* <span>{user.fullName || user.username}</span> */}
+                  <UserButton />
+                </li>
+              )}
             </ul>
-            <button
-              className="absolute top-4 right-4 text-white text-3xl"
-              onClick={toggleMenu}
-            >
-              <svg
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill="currentColor"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M4 5H16C16.55 5 17 5.45 17 6C17 6.55 16.55 7 16 7H4C3.45 7 3 6.55 3 6C3 5.45 3.45 5 4 5ZM4 10H16C16.55 10 17 10.45 17 11C17 11.55 16.55 12 16 12H4C3.45 12 3 11.55 3 11C3 10.45 3.45 10 4 10ZM4 15H16C16.55 15 17 15.45 17 16C17 16.55 16.55 17 16 17H4C3.45 17 3 16.55 3 16C3 15.45 3.45 15 4 15Z"
-                />
-              </svg>
-            </button>
           </div>
         )}
       </header>
