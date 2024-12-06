@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { UserButton, useUser } from "@clerk/clerk-react";
 
 const Header = () => {
-  const { isSignedIn, user } = useUser(); // Use Clerk's useUser hook
+  const { isSignedIn, user } = useUser();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -49,7 +49,6 @@ const Header = () => {
 
             <div className="flex items-center gap-4">
               {!isSignedIn ? (
-                // Show Login and Sign-Up buttons when the user is not signed in
                 <div className="sm:flex sm:gap-4">
                   <Link
                     to="/sign-in"
@@ -66,47 +65,36 @@ const Header = () => {
                   </Link>
                 </div>
               ) : (
-                // Show User Profile when signed in
                 <div className="flex items-center gap-2">
-                  {/* <img
-                    src={user.setProfileImage}
-                    alt="User Profile"
-                    className="w-10 h-10 rounded-full border-2 border-white"
-                  /> */}
-                  <span className="text-white flex gap-2">
-                    {/* {user.fullName || user.username} */}
-                    <UserButton />
-                    <h2>{user.fullName}</h2>
-                  </span>
+                  <UserButton />
+                  <span className="text-white">{user.fullName}</span>
                 </div>
               )}
-
-              {/* Hamburger Menu for Mobile */}
-              <button
-                className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden"
-                onClick={toggleMenu}
-                type="button"
-              >
-                <span className="sr-only">Open menu</span>
-                <svg
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill="currentColor"
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M4 5H16C16.55 5 17 5.45 17 6C17 6.55 16.55 7 16 7H4C3.45 7 3 6.55 3 6C3 5.45 3.45 5 4 5ZM4 10H16C16.55 10 17 10.45 17 11C17 11.55 16.55 12 16 12H4C3.45 12 3 11.55 3 11C3 10.45 3.45 10 4 10ZM4 15H16C16.55 15 17 15.45 17 16C17 16.55 16.55 17 16 17H4C3.45 17 3 16.55 3 16C3 15.45 3.45 15 4 15Z"
-                  />
-                </svg>
-              </button>
             </div>
+
+            <button
+              className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden"
+              onClick={toggleMenu}
+              type="button"
+            >
+              <span className="sr-only">Open menu</span>
+              <svg
+                className="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill="currentColor"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M4 5H16C16.55 5 17 5.45 17 6C17 6.55 16.55 7 16 7H4C3.45 7 3 6.55 3 6C3 5.45 3.45 5 4 5ZM4 10H16C16.55 10 17 10.45 17 11C17 11.55 16.55 12 16 12H4C3.45 12 3 11.55 3 11C3 10.45 3.45 10 4 10ZM4 15H16C16.55 15 17 15.45 17 16C17 16.55 16.55 17 16 17H4C3.45 17 3 16.55 3 16C3 15.45 3.45 15 4 15Z"
+                />
+              </svg>
+            </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="absolute top-16 left-0 w-full bg-[#003366] md:hidden">
             <ul className="flex flex-col items-center gap-6 text-sm text-white py-6">
@@ -145,7 +133,6 @@ const Header = () => {
                 </>
               ) : (
                 <li onClick={toggleMenu}>
-                  {/* <span>{user.fullName || user.username}</span> */}
                   <UserButton />
                 </li>
               )}

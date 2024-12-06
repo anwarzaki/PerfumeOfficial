@@ -4,14 +4,13 @@ import {
   SignedIn,
   SignedOut,
   SignIn,
+  SignUp,
   RedirectToSignIn,
 } from "@clerk/clerk-react";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Product from "./pages/Product";
-
-// const clerkFrontendApi = process.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 const ClerkProviderWrapper = ({ children }) => (
   <>
@@ -37,10 +36,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/product" element={<Product />} />
-        <Route
-          path="/sign-in/*"
-          element={<SignIn routing="path" path="/sign-in" />}
-        />
+        <Route path="/sign-in/*" element={<SignIn routing="path" path="/sign-in" />} />
+        <Route path="/sign-up/*" element={<SignUp routing="path" path="/sign-up" />} />
       </Routes>
     </Router>
   );
